@@ -1,6 +1,6 @@
-package ait.reflection;
+package src.reflection;
 
-import ait.reflection.infra.FooUtils;
+import src.reflection.infra.FooUtils;
 
 public class FooAppl {
 

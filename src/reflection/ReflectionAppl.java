@@ -1,4 +1,4 @@
-package ait.reflection;
+package src.reflection;
 
 public class ReflectionAppl {
 
