@@ -1,0 +1,8 @@
+Cat|9|true
+John|10|true
+Maria|4|false
+Baris|1|true
+Anna|1|false
+Catty|4|true
+Mara|2|false
+John|10|true
