@@ -1,4 +1,4 @@
-package src.multiThreadindIntro.multithreading.task;
+package multiThreadindIntro.multithreading.task;
 
 public class MyTaskExtends extends Thread{
 

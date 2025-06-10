@@ -1,7 +1,7 @@
-package src.multiThreadindIntro.multithreading;
+package multiThreadindIntro.multithreading;
 
-import src.multiThreadindIntro.multithreading.task.MyTaskExtends;
-import src.multiThreadindIntro.multithreading.task.MyTaskImplements;
+import multiThreadindIntro.multithreading.task.MyTaskExtends;
+import multiThreadindIntro.multithreading.task.MyTaskImplements;
 
 public class MultiThreadingApp {
 
