@@ -6,6 +6,7 @@ public class TarakansRaceApp {
 
     // Номер таракана, который победит
     private static int winnerNumber = 0;
+    private final static Object mutex = new Object();
 
     public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
@@ -46,8 +47,10 @@ public class TarakansRaceApp {
     }
 
     static void trySetWinner(int cockroachNumber) {
-        if (winnerNumber == 0) {
-            winnerNumber = cockroachNumber;
+        synchronized (mutex) {
+            if (winnerNumber == 0) {
+                winnerNumber = cockroachNumber;
+            }
         }
     }
 }
