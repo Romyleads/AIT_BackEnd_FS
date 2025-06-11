@@ -19,7 +19,7 @@ public class ElevatorAppl {
         Track[] trucks = new Track[N_TRUCK];
 
         for (int i = 0; i < trucks.length; i++) {
-            trucks[i] = new Track(N_RACES, CAPACITY,  elevator1, elevator2);
+            trucks[i] = new Track(N_RACES, CAPACITY, elevator1, elevator2);
 
         }
 
@@ -33,8 +33,8 @@ public class ElevatorAppl {
         for (int i = 0; i < threads.length; i++) {
             threads[i].join();
         }
-        System.out.println("Elevator "+ elevator1.getName() + " has " + elevator1.getCurrentVolume());
-        System.out.println("Elevator "+ elevator2.getName() + " has " + elevator2.getCurrentVolume());
+        System.out.println("Elevator " + elevator1.getName() + " has " + elevator1.getCurrentVolume());
+        System.out.println("Elevator " + elevator2.getName() + " has " + elevator2.getCurrentVolume());
 
     }
 }
