@@ -7,40 +7,42 @@ import java.util.Scanner;
 public class ClientSocketAppl {
     public static void main(String[] args) {
 
-        String serverHost = "127.0.0.1"; // localhost
-        int port = 9000;
 
-        //Socket socket = new Socket(serverHost,port);
-        try (Socket socket = new Socket(serverHost,port);) {
+        if (args.length==1){
 
-            // Байтовые потоки - сейчас планируем текстовый формат
-            InputStream inputStream = socket.getInputStream();
-            OutputStream outputStream= socket.getOutputStream();
+            args = new String[]{args[0],"9000"};
+        }
+        if (args.length==0){
 
-            PrintWriter socketWriter = new PrintWriter(outputStream);
-
-            // BufferedReader -потокобезопасный в мультисредовой среде
-            BufferedReader socketReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            Scanner consoleScanner = new Scanner(System.in);
-            System.out.println("Enter your message, or type exit for quit");
-
-            String message = consoleScanner.nextLine();
-            while (!"exit".equalsIgnoreCase(message)){
-                socketWriter.println(message);
-                String response = socketReader.readLine();
-                System.out.println(response);
-                System.out.println("Enter your message, or type exit for quit");
-                message = consoleScanner.nextLine();
-
-
-            }
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            args = new String[]{"127.0.0.1","9000"};
         }
 
+        String serverHost = args[0];
+        int port = Integer.parseInt(args[1]);
 
+
+
+        //String serverHost = "127.0.0.1"; // localhost
+        //int port = 9000;
+
+        try (Socket socket = new Socket(serverHost, port);
+             BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             PrintWriter socketWriter = new PrintWriter(socket.getOutputStream(), true); // autoFlush = true
+             Scanner consoleScanner = new Scanner(System.in)) {
+
+            System.out.println("Enter your message, or type 'exit' to quit");
+
+            String message = consoleScanner.nextLine();
+            while (!"exit".equalsIgnoreCase(message)) {
+                socketWriter.println(message); // autoFlush работает
+                String response = socketReader.readLine();
+                System.out.println("Server response: " + response);
+                System.out.println("Enter your message, or type 'exit' to quit");
+                message = consoleScanner.nextLine();
+            }
+
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+        }
     }
 }
