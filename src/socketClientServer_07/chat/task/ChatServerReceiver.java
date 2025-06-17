@@ -1,5 +1,8 @@
 package socketClientServer_07.chat.task;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
@@ -15,6 +18,14 @@ private final BlockingQueue<String> messageBox;
 
     @Override
     public void run() {
-        // TODO
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+            String message;
+            while ((message = reader.readLine()) != null) {
+                System.out.println("Received from client: " + message);
+                messageBox.put(message);
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Receiver error: " + e.getMessage());
+        }
     }
 }
