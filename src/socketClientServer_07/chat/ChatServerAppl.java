@@ -12,6 +12,10 @@ public class ChatServerAppl {
     public static void main(String[] args) throws InterruptedException {
         int port = 9000;
 
+        if (args.length ==1){
+            port = Integer.parseInt(args[0]);
+        }
+
         // Sender reads messages from this queue
         BlockingQueue<String> messageBox = new ArrayBlockingQueue<>(10);
 
@@ -22,7 +26,7 @@ public class ChatServerAppl {
         senderThread.start();
 
         // Receivers threads for reading messages from clients
-        ExecutorService executorService = Executors.newFixedThreadPool(10); // увеличен пул
+        ExecutorService executorService = Executors.newFixedThreadPool(25); // увеличен пул
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {

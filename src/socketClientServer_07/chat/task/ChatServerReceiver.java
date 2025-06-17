@@ -22,7 +22,7 @@ private final BlockingQueue<String> messageBox;
             String message;
             while ((message = reader.readLine()) != null) {
                 System.out.println("Received from client: " + message);
-                messageBox.put(message);
+                messageBox.put(message); // classic situation (wait)
             }
         } catch (IOException | InterruptedException e) {
             System.out.println("Receiver error: " + e.getMessage());
