@@ -18,7 +18,7 @@ public class ThreadPoolIntegralAppl_v2 {
     public static void main(String[] args) throws InterruptedException {
 
         int cores = Runtime.getRuntime().availableProcessors(); // сколько ядер
-        int N_TASKS = cores * 10; // много задач, но не много потоков
+        int N_TASKS = cores * 1800; // много задач, но не много потоков
 
         SumRectangles[] tasks = new SumRectangles[N_TASKS];
         for (int i = 0; i < N_TASKS; i++) {

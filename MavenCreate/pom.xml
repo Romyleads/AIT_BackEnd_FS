@@ -2,7 +2,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- Новый рабочий вариант (использует родительский pom из AIT_BackEnd_FS) -->
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>AIT_BackEnd_FS</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>MavenCreate</artifactId>
+
+    <dependencies>
+        <!-- Версии подтягиваются из dependencyManagement -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Старый вариант (оставлен для справки):
 
     <groupId>org.example</groupId>
     <artifactId>MavenCreate</artifactId>
@@ -26,7 +51,7 @@
             <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
+    -->
 
 </project>
