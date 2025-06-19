@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-public class ImaggaTagAppl {
+public class ImageColorTagAppl {
     public static void main(String[] args) {
         // image url
         String imgUrl = "https://www.chudesa.kiev.ua/wp-content/uploads/2020/01/87ceead492298d404b417a0ada815820-1.jpg";
