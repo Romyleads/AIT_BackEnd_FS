@@ -1,4 +1,3 @@
-
 package ait.imagga_colors_homework;
 
 import ait.imagga_colors_homework.dto.ColorsResponseDto;
@@ -30,27 +29,35 @@ public class ImageColorTagAppl {
                 .fromHttpUrl("https://api.imagga.com/v2/colors")
                 .queryParam("image_url", imgUrl);
 
-        // request URL
+        // create request
         URI url = builder.build().toUri();
         RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, url);
 
         // send request
         ResponseEntity<ColorsResponseDto> response = restTemplate.exchange(request, ColorsResponseDto.class);
 
-        // get color list
-        List<ImageColorDto> colors = response.getBody()
-                                              .getResult()
-                                              .getColors()
-                                              .getImage_colors();
+        // get all colors
+        var colorsDto = response.getBody().getResult().getColors();
 
         // print table
-        System.out.printf("%-20s %-20s %-10s%n", "color name", "parent color", "coverage %");
-        System.out.println("-----------------------------------------------------------");
+        System.out.printf("%-20s %-20s %-20s %-10s%n", "color name", "parent color", "type of color", "coverage %");
+        System.out.println("--------------------------------------------------------------------------------");
 
-        // print each color
-        colors.forEach(color -> System.out.printf("%-20s %-20s %-10.2f%n",
+        // print each group
+        printColorList(colorsDto.getImage_colors(), "image");
+        printColorList(colorsDto.getBackground_colors(), "background");
+        printColorList(colorsDto.getForeground_colors(), "foreground");
+    }
+
+    // print color list
+    private static void printColorList(List<ImageColorDto> colors, String groupName) {
+        if (colors == null) return;
+
+        // print row
+        colors.forEach(color -> System.out.printf("%-20s %-20s %-20s %-10.2f%n",
                 color.getClosest_palette_color(),
-                color.getParent_color(),
+                color.getParent_color() != null ? color.getParent_color() : "-",
+                groupName,
                 color.getPercent()));
     }
 }
